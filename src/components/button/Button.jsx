@@ -1,8 +1,11 @@
 import { StyledButton } from './button.styles';
 
-const Button = ({ color, children }) => {
-	console.log(color);
-	return <StyledButton color={color}>{children}</StyledButton>;
+const Button = ({ color, children, action }) => {
+	return (
+		<button onClick={action} color={color}>
+			{children}
+		</button>
+	);
 };
 
 export default Button;
