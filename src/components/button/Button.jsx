@@ -1,8 +1,8 @@
 import { StyledButton } from './button.styles';
 
-const Button = ({ color, children, action }) => {
+const Button = ({ color, children, action, disabled }) => {
 	return (
-		<button onClick={action} color={color}>
+		<button disabled={disabled} onClick={action} color={color}>
 			{children}
 		</button>
 	);

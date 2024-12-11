@@ -6,6 +6,8 @@ const App = () => {
 	const [counter, setCounter] = useState(0);
 	const [incrementValue, setIncrementValue] = useState(1);
 	const [profile, setProfile] = useState(0);
+	const lastProfile = profile === USERS.length - 1;
+	const firstProfile = profile === 0;
 
 	return (
 		<>
@@ -35,12 +37,19 @@ const App = () => {
 			</Button>
 
 			<h2>Ejercicio2</h2>
-			<img src={USERS[0].profileImage} alt='' />
-			<h1>Name: {USERS[0].name}</h1>
-			<h3>Username: {USERS[0].username}</h3>
-			<h3>Email: {USERS[0].email}</h3>
-			<Button>Previus</Button>
-			<Button>Next</Button>
+			<img src={USERS[profile].profileImage} alt='' />
+			<h1>Name: {USERS[profile].name}</h1>
+			<h3>Username: {USERS[profile].username}</h3>
+			<h3>Email: {USERS[profile].email}</h3>
+			<Button
+				action={() => previus(profile, setProfile)}
+				disabled={firstProfile}
+			>
+				Previus
+			</Button>
+			<Button action={() => next(profile, setProfile)} disabled={lastProfile}>
+				Next
+			</Button>
 		</>
 	);
 };
@@ -48,10 +57,20 @@ const App = () => {
 export default App;
 
 const next = (profile, setProfile) => {
-	setProfile();
+	if (profile < USERS.length - 1) {
+		setProfile(profile + 1); // Avanza al siguiente perfil
+	} else {
+		setProfile(0); // Si estamos en el último, vuelve al primero
+	}
 };
 
-const previus = (profile, setProfile) => {};
+const previus = (profile, setProfile) => {
+	if (profile > 0) {
+		setProfile(profile - 1); // Retrocede al perfil anterior
+	} else {
+		setProfile(USERS.length - 1); // Si estamos en el primero, va al último
+	}
+};
 
 /*counter*/
 const incrementCounter = (counter, setCounter, incrementValue) => {
